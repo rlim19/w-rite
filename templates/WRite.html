@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
+
 {% block body %}
     <h1> w-rite </h1>
+    <p>Hi, {{name}} </p>
     <form method="post">
         <label>
             <div>Title</div> 
@@ -17,11 +19,14 @@
 
         <input type="submit">
     </form>
+    <br>
+    <a href="{{logout}}">logout</a>
 
     <hr>
 
     {% for note in notes%}
     <div class="note">
+        <div class="note-created">{{note.created.strftime('%c')}}</div>
         <div class="note-title">{{note.title}}</div>
         <pre class="note-body">{{note.note}}</pre>
     </div>

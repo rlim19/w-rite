@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1> w-rite </h1>
+    <em> Jot Down Everything!</em>
+
+
+    <br>
+    <br>
+    <br>
+
+    <p> 
+    Please Log in. Not a member yet? 
+    <a href="/signup">Sign Up</a> now!
+    </p>
+
+    <form method="post">
+        <table>
+            <tr>
+                <td class="label">
+                    Email 
+                </td>
+                <td>
+                    <input type="text" name="email" value="{{email}}"> 
+                </td>
+                <td class="error">
+                    {{error_email}}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    Password
+                </td>
+                <td>
+                    <input type="text" name="password" value="{{password}}"> 
+                </td>
+                <td class="error">
+                    {{error_password}}
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Login"/>
+        <input type="submit" value="Cancel" 
+        onclick="window.location='/'; return false;"/>
+    </form>
+
+{% endblock %}

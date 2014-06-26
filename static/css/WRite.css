@@ -9,6 +9,7 @@ body {
     color:red;
 }
 
+
 label {
     display: block;
     font-size: 20px;
@@ -29,7 +30,7 @@ textarea {
 }
 
 input[type=submit] {
-    font-size: 30px;
+    font-size: 50px;
 }
 
 hr {
@@ -37,12 +38,16 @@ hr {
 }
 
 .note + .note {
-    margin-top: 20px;
+    margin-top: 30px;
+}
+
+.note-created {
+    font-size: 15px;
 }
 
 .note-title {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .note-body {

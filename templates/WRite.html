@@ -10,8 +10,9 @@
 
         <label>
             <div>Note</div>
-            <textarea name="note" value="{{note}}"></textarea>
+            <textarea name="note">{{note}}</textarea>
         </label>
+
         <div class="error"> {{error}} </div>
 
         <input type="submit">
@@ -20,9 +21,9 @@
     <hr>
 
     {% for note in notes%}
-    <div class="art">
-        <div class="note-title">{{art.title}}</div>
-        <pre class="note-body">{{art.art}}</pre>
+    <div class="note">
+        <div class="note-title">{{note.title}}</div>
+        <pre class="note-body">{{note.note}}</pre>
     </div>
     {% endfor %}
 

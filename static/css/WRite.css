@@ -36,21 +36,16 @@ hr {
     margin: 20px auto;
 }
 
-.art + .art {
+.note + .note {
     margin-top: 20px;
 }
 
-.art-title {
+.note-title {
     font-weight: bold;
     font-size: 20px;
 }
 
-.art-body {
+.note-body {
     margin: 0;
     font-size: 17px;
 }
-
-    
-
-
-

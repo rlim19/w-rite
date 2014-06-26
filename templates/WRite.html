@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1> w-rite </h1>
+    <form method="post">
+        <label>
+            <div>Title</div> 
+            <input type="text" name="title" value="{{title}}">
+        </label>
+
+        <label>
+            <div>Note</div>
+            <textarea name="note" value="{{note}}"></textarea>
+        </label>
+        <div class="error"> {{error}} </div>
+
+        <input type="submit">
+    </form>
+
+    <hr>
+
+    {% for note in notes%}
+    <div class="art">
+        <div class="note-title">{{art.title}}</div>
+        <pre class="note-body">{{art.art}}</pre>
+    </div>
+    {% endfor %}
+
+{% endblock %}

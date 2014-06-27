@@ -9,8 +9,8 @@ w-rite uses google.appengine technology:
   - Google Login
   
 ## TIPS on using w-rite
-- move to the text block using <tab>
-- move back to the previous text block using <shift-tab>
+- move to the text block using [tab]
+- move back to the previous text block using [shift-tab]
 
 ## TODO 
 - use wtform

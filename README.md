@@ -7,6 +7,10 @@ Currently to use w-rite, you need first to login with your google account. Once,
 w-rite uses google.appengine technology:
   - jinja2 template
   - Google Login
+  
+## TIPS on using w-rite
+- move to the text block using <tab>
+- move back to the previous text block using <shift-tab>
 
 ## TODO 
 - use wtform

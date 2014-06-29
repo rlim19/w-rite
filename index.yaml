@@ -12,6 +12,19 @@ indexes:
 
 - kind: Note
   properties:
+  - name: userID
+  - name: created
+    direction: desc
+
+- kind: Note
+  properties:
   - name: userid
+  - name: created
+    direction: desc
+
+- kind: Note
+  ancestor: yes
+  properties:
+  - name: userID
   - name: created
     direction: desc

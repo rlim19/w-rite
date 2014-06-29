@@ -6,8 +6,8 @@ import jinja2
 from WRite import WRite_handlers
 
 
-DEBUG = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
+#DEBUG = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
 
 app = webapp2.WSGIApplication([
     ('/', WRite_handlers.WRite),
-], debug=True)
+], debug=False)

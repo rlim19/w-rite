@@ -2,8 +2,18 @@
 
 
 {% block body %}
-    <h1> w-rite </h1>
-    <p>Hi, {{name}} </p>
+    <h1 class="slogan"> w-rite </h1>
+    <span> <em>Write AnyText on Your Browser</em></span>
+
+    <br>
+    <br>
+
+    <p>Hi, <em>{{name}}</em> </p>
+    <br>
+
+    <table class="main-table" cellpadding="0" cellspacing="0">
+
+    <td class="note-table">
     <form method="post">
         <label>
             <div>Title</div> 
@@ -15,18 +25,30 @@
             <textarea name="note">{{note}}</textarea>
         </label>
 
+        <input type="submit">
+        <a href="{{logout}}">logout</a>
         <div class="error"> {{error}} </div>
 
-        <input type="submit">
     </form>
-    <br>
-    <a href="{{logout}}">logout</a>
+    </td>
+
+    <td class="map-table">
+        {% if img_url %}
+            <h2>My Notes were created at:</h2>
+            <img class="map" align=right src="{{img_url}}">
+        {% endif %}
+    </td>
+
+    </table>
+
 
     <hr>
 
     {% for note in notes%}
     <div class="note">
-        <div class="note-created">{{note.created.strftime('%c')}}</div>
+        <div class="note-created">
+            {{note.created.strftime('%c')}} {{note.city}} {{note.country}} 
+        </div>
         <div class="note-title">{{note.title}}</div>
         <pre class="note-body">{{note.note}}</pre>
     </div>

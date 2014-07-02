@@ -7,6 +7,7 @@ note_key = db.Key.from_path('WRite', 'notes')
 
 class Note(db.Model):
     userID = db.StringProperty(required = True)
+    userName = db.StringProperty()
     userEmail = db.StringProperty(required = True)
     title = db.StringProperty(required=True)
     note = db.TextProperty(required=True)

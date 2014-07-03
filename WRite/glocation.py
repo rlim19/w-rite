@@ -9,7 +9,7 @@ IP_URL = "http://api.hostip.info/?ip="
 class IpLocation(object):
     def __init__(self, ip):
         #ip = "4.2.2.2" # for a test!
-        #ip = "23.24.209.141"
+        ip = "23.24.209.141"
         #ip = "114.4.23.119"
         #ip = "23.24.209.141"
         self.ip = ip

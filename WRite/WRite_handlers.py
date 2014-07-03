@@ -9,34 +9,55 @@ from google.appengine.api import memcache
 import time
 import logging
 from glocation import *
+from datetime import datetime, timedelta
 
 
-def display_notes(userID, update=False):
+def get_notes(userID, update=False):
     """
     display notes implemented with CAS (Check and Set)
+    age = age of cache
     """
-
     memc = memcache.Client()
-    key = 'top' 
+    key = 'NOTES' 
 
     while True: 
-        notes = memc.gets(key)
+    #for i in xrange(1,10):
+        r = memc.gets(key)
+        if r:
+            #logging.error('age computed')
+            notes, save_time = r
+            age = (datetime.utcnow() - save_time). total_seconds()
+        else:
+            notes, age = None, 0 
+            logging.error('initialized')
 
         if notes is None or update:
-            #logging.error('DB Query')
+            logging.error('DB Query')
             notes = db.GqlQuery("SELECT * FROM Note "
                                 "WHERE ANCESTOR is :1 AND userID = :2 "
                                 "ORDER BY created DESC " , 
                                 note_key, userID)
+
             notes = list(notes)
-            memc.add(key, notes)
+            save_time = datetime.utcnow()
+            memc.add(key, (notes, save_time))
+            
 
         assert notes is not None, "Uninitialized notes"
-        if memc.cas(key, notes):
+        if memc.cas(key, (notes, save_time)):
             #logging.error('Test cas pass')
             break
+        #logging.error('Loop hell')
 
-    return notes
+
+    return notes, age
+
+def age_str(age):
+    s = 'Queried %s seconds ago'
+    age = int(age)
+    if age == 1:
+        s = s.replace('seconds', 'second')
+    return s % age
 
 class WRite(basehandler.BaseHandler, IpLocation):
     def render_write(self,logout='',name='',title='',note='',error=''):
@@ -45,7 +66,7 @@ class WRite(basehandler.BaseHandler, IpLocation):
         userID = user.user_id()
         name = user.nickname()
         logout = users.create_logout_url("/") 
-        notes = display_notes(userID = userID)
+        notes, age = get_notes(userID = userID)
 
         points = filter(None, (n.coords for n in notes))
 
@@ -56,7 +77,8 @@ class WRite(basehandler.BaseHandler, IpLocation):
         self.render("WRite.html",
                     name = name, title = title, 
                     note = note, error = error, 
-                    notes = notes, logout = logout, img_url = img_url)
+                    notes = notes, logout = logout, 
+                    img_url = img_url, age= age_str(age))
 
     def get(self):
         self.render_write()
@@ -89,7 +111,7 @@ class WRite(basehandler.BaseHandler, IpLocation):
                     NOTE.country = country
 
                 NOTE.put()
-                display_notes(update=True, userID = userID)
+                get_notes(userID = userID, update=True)
                 #time.sleep(1)
                 self.redirect('/')
             else:
